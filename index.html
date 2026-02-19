@@ -704,6 +704,45 @@
     color: #fbbf24;
   }
 
+  /* Image de la carte mentale */
+  .carte-mentale-image-container {
+    max-width: 1000px;
+    margin: 0 auto var(--spacing-xl);
+    text-align: center;
+    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+  }
+  
+  .carte-mentale-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 3px solid #E9AC16;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--bg-white);
+    padding: 10px;
+  }
+  
+  .carte-mentale-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px rgba(233, 172, 22, 0.25);
+  }
+  
+  .carte-mentale-caption {
+    margin-top: var(--spacing-md);
+    color: var(--text-muted);
+    font-size: 0.9em;
+    font-style: italic;
+  }
+  
+  [data-theme="dark"] .carte-mentale-caption {
+    color: #b8b8b8;
+  }
+  
+  [data-theme="dark"] .carte-mentale-image {
+    background: var(--bg-white);
+  }
+
   .carte-mentale-concepts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1047,6 +1086,8 @@
         <ul class="list-styled">
           <li><span class="date-major">1774-1792</span><span class="date-event">Règne de Louis XVI en France, période de critique croissante de l'absolutisme</span></li>
           <li><span class="date-major">1776</span><span class="date-event">Déclaration d'indépendance américaine, inspirée des idées des Lumières</span></li>
+          <li><span class="date-major">1787</span><span class="date-event">Assemblée des notables en France, premiers signes de la crise de l'Ancien Régime</span></li>
+          <li><span class="date-major">1789</span><span class="date-event">Convocation des États généraux et début de la Révolution française</span></li>
         </ul>
       </div>
     </div>
@@ -1101,7 +1142,7 @@
     <div class="carte-content">
       <h4>L'Europe des Lumières et des despotismes éclairés au XVIIIe siècle</h4>
       <div class="carte-map-placeholder">
-        <img src="https://github.com/FarKaas/CHRONOSCOPE-4e-Histoire-CH2/blob/main/index.png?raw=true" alt="Carte de l'Europe des Lumières au XVIIIe siècle" style="max-width: 100%; height: auto; border-radius: 8px;">
+        <img src="https://github.com/FarKaas/CHRONOSCOPE-4e-Histoire-CH2/blob/main/Carte.png?raw=true" alt="Carte de l'Europe des Lumières au XVIIIe siècle" style="max-width: 100%; height: auto; border-radius: 8px;">
       </div>
       <p><strong>Source :</strong> Manuel scolaire Histoire 4e</p>
     </div>
@@ -1149,6 +1190,25 @@
   </section>
 
 
+  <!-- CARTE MENTALE -->
+  <section class="section carte-mentale">
+    <div class="section-header">
+      <div class="section-badge">9</div>
+      <span>🧠 CARTE MENTALE</span>
+    </div>
+    <div class="carte-mentale-content">
+      <h4>L'Europe des Lumières : synthèse visuelle</h4>
+      
+      <div class="carte-mentale-image-container">
+        <img src="https://github.com/FarKaas/CHRONOSCOPE-4e-Histoire-CH2/blob/main/Carte%20mentale.png?raw=true" 
+          alt="Carte mentale - L'Europe des Lumières" 
+          class="carte-mentale-image">
+        <p class="carte-mentale-caption">
+          <strong>Thème central :</strong> L'Europe des Lumières - Contestation de l'ordre politique, social et religieux au XVIIIe siècle
+        </p>
+      </div>
+    </div>
+  </section>
 </div>
 
 <script>
