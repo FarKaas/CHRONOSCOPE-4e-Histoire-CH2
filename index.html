@@ -1,887 +1,847 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fiche de Synthèse - Histoire 4e - L'Europe des Lumières</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --primary: #6366f1;
-    --secondary: #0ea5e9;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --danger: #ef4444;
-    --info: #ec4899;
-    --purple: #413BDD;
-    --bilan: #64748b;
-    
-    --bg-white: #ffffff;
-    --bg-light: #f8fafc;
-    --text-dark: #1e293b;
-    --text-muted: #64748b;
-    --text-light: #ffffff;
-    
-    --spacing-sm: 12px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    
-    --shadow-sm: 0 2px 8px rgba(108, 92, 231, 0.08);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-    
-    --gradient-primary: linear-gradient(100deg, var(--primary), #a5b4fc);
-    --gradient-secondary: linear-gradient(100deg, var(--secondary), #7dd3fc);
-    --gradient-success: linear-gradient(100deg, var(--success), #6ee7b7);
-    --gradient-warning: linear-gradient(100deg, var(--warning), #fbbf24);
-    --gradient-danger: linear-gradient(100deg, var(--danger), #f87171);
-    --gradient-info: linear-gradient(100deg, var(--info), #f472b6);
-    --gradient-carte: linear-gradient(100deg, var(--purple), #7490FF);
-    --gradient-bilan: linear-gradient(100deg, var(--bilan), #9EA9AD);
-    --gradient-carte-mentale: linear-gradient(100deg, #E9AC16, #fbbf24);
-  }
-
-  [data-theme="dark"] {
-    --bg-light: #292929;
-    --bg-white: #3a3a3a;
-    --text-dark: #e8e8e8;
-    --text-muted: #b8b8b8;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    font-family: 'Roboto', Arial, sans-serif;
-    margin: 0;
-    padding-top: 80px;
-    background: var(--bg-light);
-    color: var(--text-dark);
-    transition: all 0.3s ease;
-  }
-
-  /* Toolbar */
-  .toolbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-bottom: 2px solid #e9ecef;
-    box-shadow: var(--shadow-md);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 10px 20px;
-  }
-
-  [data-theme="dark"] .toolbar {
-    background: linear-gradient(135deg, #2e2e2e 0%, #2e2e2e 100%);
-    border-bottom-color: #444444;
-  }
-
-  .toolbar-btn {
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: transform 0.2s ease;
-  }
-
-  .toolbar-btn:hover { transform: translateY(-2px); }
-
-  .btn-theme { background: linear-gradient(135deg, #74b9ff, #0984e3); }
-  .btn-print { background: linear-gradient(135deg, #4BC01B, #3A9415); }
-  .btn-font { background: linear-gradient(135deg, #fd79a8, #e84393); }
-
-  /* Contenu principal */
-  .content {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 30px;
-  }
-
-  /* En-tête */
-  .chapter-header {
-    text-align: center;
-    margin: 0 auto 40px;
-    padding: 25px;
-    background: linear-gradient(#E6834C, #7362EA);
-    color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
-  }
-
-  .theme-title {
-    font-size: 20px;
-    font-weight: 400;
-    opacity: 0.9;
-    margin-bottom: 20px;
-  }
-  
-  .chapter-title {
-    margin: 12px 0;
-    font-size: 2em;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-  
-  .chapter-number {
-    font-size: 20px;
-    font-weight: 500;
-    opacity: 0.9;
-    margin-top: 2px;
-  }
-
-  /* Sections */
-  .section {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto var(--spacing-xl);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-md) var(--spacing-lg);
-    font-size: 1.3em;
-    font-weight: 700;
-    color: var(--text-light);
-  }
-
-  .section-badge {
-    background: rgba(255,255,255,0.25);
-    border: 2px solid rgba(255,255,255,0.35);
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-lg);
-    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
-  }
-
-  .card {
-    background: var(--bg-white);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-lg) var(--spacing-xl);
-    box-shadow: var(--shadow-sm);
-    border: 2px solid;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(108, 92, 231, 0.15);
-  }
-
-  .list-styled {
-    list-style: none;
-    padding-left: 10px;
-    margin: 0;
-  }
-
-  .list-styled li {
-    position: relative;
-    margin: var(--spacing-md) 0;
-    line-height: 1.5;
-    font-size: 0.95em;
-    padding-left: 35px;
-  }
-
-  .list-styled li::before {
-    content: '●';
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1em;
-  }
-
-  /* Styles spécifiques par section */
-  .problematique {
-    background: linear-gradient(180deg, #f1efff, #e8e5ff);
-    border-left: 5px solid var(--primary);
-  }
-
-  [data-theme="dark"] .problematique {
-    background: linear-gradient(180deg, #3a3650, #2f2d45);
-  }
-
-  .problematique .section-header {
-    background: var(--gradient-primary);
-  }
-
-  .problematique-content {
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-left: 4px solid var(--primary);
-  }
-
-  .problematique-highlight-box {
-    background: var(--bg-white);
-    border: 2px solid var(--primary);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
-    box-shadow: var(--shadow-md);
-  }
-
-  .problematique-highlight-box h4 {
-    font-size: 1.1em;
-    margin: 0 0 var(--spacing-sm);
-    color: var(--primary);
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  .problematique .list-styled li::before {
-    content: '▶';
-    color: var(--primary);
-  }
-
-  /* Plan */
-  .plan {
-    background: linear-gradient(180deg, #e6f3ff, #ddeeff);
-    border-left: 5px solid var(--secondary);
-  }
-
-  [data-theme="dark"] .plan {
-    background: linear-gradient(180deg, #2e3950, #242945);
-  }
-
-  .plan .section-header {
-    background: var(--gradient-secondary);
-  }
-
-  .plan .card:nth-child(1) { border-color: #00b894; }
-  .plan .card:nth-child(2) { border-color: #6c5ce7; }
-  .plan .card:nth-child(3) { border-color: #E15750; }
-
-  .plan-card-header {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .plan-card-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    color: var(--text-light);
-    font-size: 1em;
-    box-shadow: var(--shadow-sm);
-    flex-shrink: 0;
-  }
-
-  .plan .card:nth-child(1) .plan-card-icon { background: #00b894; }
-  .plan .card:nth-child(2) .plan-card-icon { background: #6c5ce7; }
-  .plan .card:nth-child(3) .plan-card-icon { background: #E15750; }
-
-  .plan .card:nth-child(1) h3 { color: #00b894; }
-  .plan .card:nth-child(2) h3 { color: #6c5ce7; }
-  .plan .card:nth-child(3) h3 { color: #E15750; }
-
-  .plan-card-title {
-    font-size: 1.1em;
-    margin: 0;
-    line-height: 1.5;
-    font-weight: 600;
-    flex-grow: 1;
-  }
-
-  /* Compétences */
-  .competences {
-    background: linear-gradient(180deg, #e6f6f0, #dff5ec);
-    border-left: 5px solid var(--success);
-  }
-
-  [data-theme="dark"] .competences {
-    background: linear-gradient(180deg, #2e4f40, #243936);
-  }
-
-  .competences .section-header {
-    background: var(--gradient-success);
-  }
-
-  .competences .card {
-    border-color: var(--success);
-  }
-
-  .competences-title {
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-    font-size: 1.1em;
-    color: var(--success);
-    text-transform: uppercase;
-  }
-
-  [data-theme="dark"] .competences-title {
-    color: #6ee7b7;
-  }
-
-  .competences .list-styled li::before {
-    color: var(--success);
-  }
-
-  /* Vocabulaire */
-  .vocabulaire {
-    background: linear-gradient(180deg, #fef7ed, #fed7aa);
-    border-left: 5px solid var(--warning);
-  }
-
-  [data-theme="dark"] .vocabulaire {
-    background: linear-gradient(180deg, #4d4230, #3d3628);
-  }
-
-  .vocabulaire .section-header {
-    background: var(--gradient-warning);
-  }
-
-  .vocabulaire .card {
-    border-color: var(--warning);
-  }
-
-  .vocabulaire .list-styled li::before {
-    color: var(--warning);
-  }
-
-  .vocab-term {
-    font-weight: 700;
-    color: var(--warning);
-    text-transform: uppercase;
-    display: inline;
-    margin-right: 8px;
-  }
-
-  .vocab-definition {
-    font-weight: 400;
-    color: var(--text-dark);
-    text-transform: none;
-    display: inline;
-  }
-
-  [data-theme="dark"] .vocab-term {
-    color: #fbbf24;
-  }
-
-  [data-theme="dark"] .vocab-definition {
-    color: #ffffff;
-  }
-
-  /* Catégories de vocabulaire */
-  .vocab-category-title {
-    font-weight: 700;
-    color: var(--warning);
-    font-size: 1.1em;
-    margin-bottom: var(--spacing-sm);
-    text-transform: uppercase;
-    text-align: center;
-    padding-bottom: 8px;
-  }
-
-  [data-theme="dark"] .vocab-category-title {
-    color: #fbbf24;
-  }
-
-  .vocabulaire .card:nth-child(1) { border-color: #e74c3c; }
-  .vocabulaire .card:nth-child(2) { border-color: #3498db; }
-  .vocabulaire .card:nth-child(3) { border-color: #9b59b6; }
-  .vocabulaire .card:nth-child(4) { border-color: #e67e22; }
-
-  .vocabulaire .card:nth-child(1) .vocab-category-title { color: #e74c3c; }
-  .vocabulaire .card:nth-child(2) .vocab-category-title { color: #3498db; }
-  .vocabulaire .card:nth-child(3) .vocab-category-title { color: #9b59b6; }
-  .vocabulaire .card:nth-child(4) .vocab-category-title { color: #e67e22; }
-
-  .vocabulaire .card:nth-child(1) .vocab-term { color: #e74c3c; }
-  .vocabulaire .card:nth-child(2) .vocab-term { color: #3498db; }
-  .vocabulaire .card:nth-child(3) .vocab-term { color: #9b59b6; }
-  .vocabulaire .card:nth-child(4) .vocab-term { color: #e67e22; }
-
-  .vocabulaire .card:nth-child(1) .list-styled li::before { color: #e74c3c; }
-  .vocabulaire .card:nth-child(2) .list-styled li::before { color: #3498db; }
-  .vocabulaire .card:nth-child(3) .list-styled li::before { color: #9b59b6; }
-  .vocabulaire .card:nth-child(4) .list-styled li::before { color: #e67e22; }
-
-  /* Dates */
-  .dates {
-    background: linear-gradient(180deg, #ffe8e8, #ffd6d6);
-    border-left: 5px solid var(--danger);
-  }
-
-  [data-theme="dark"] .dates {
-    background: linear-gradient(180deg, #4d3030, #3d2828);
-  }
-
-  .dates .section-header {
-    background: var(--gradient-danger);
-  }
-
-  .dates-content {
-    padding: var(--spacing-md) var(--spacing-lg);
-  }
-
-  .dates-highlight-box {
-    background: var(--bg-white);
-    border: 2px solid var(--danger);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    box-shadow: var(--shadow-md);
-  }
-
-  .dates-highlight-box h4 {
-    font-size: 1.1em;
-    margin: 0 0 var(--spacing-sm);
-    color: var(--danger);
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  .dates .list-styled li {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-    margin: var(--spacing-sm) 0;
-    padding-left: 0;
-  }
-
-  .dates .list-styled li::before {
-    content: none;
-  }
-
-  .date-major {
-    font-weight: 700;
-    color: var(--danger);
-    min-width: 80px;
-    flex-shrink: 0;
-  }
-
-  .date-event {
-    color: var(--text-dark);
-    line-height: 1.4;
-  }
-
-  /* Personnages */
-  .personnages {
-    background: linear-gradient(180deg, #ffe6f0, #ffcce0);
-    border-left: 5px solid var(--info);
-  }
-
-  [data-theme="dark"] .personnages {
-    background: linear-gradient(180deg, #4d3040, #3d2836);
-  }
-
-  .personnages .section-header {
-    background: var(--gradient-info);
-  }
-
-  .personnages .card {
-    border-color: var(--info);
-  }
-
-  .personnages-title {
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-    font-size: 1.1em;
-    color: var(--info);
-    text-transform: uppercase;
-  }
-
-  [data-theme="dark"] .personnages-title {
-    color: #f472b6;
-  }
-
-  .personnages-dates {
-    font-style: italic;
-    color: #5a6571;
-    margin-bottom: 8px;
-    font-size: 0.9em;
-  }
-
-  [data-theme="dark"] .personnages-dates {
-    color: #b8b8b8;
-  }
-
-  /* Carte */
-  .carte {
-    background: linear-gradient(180deg, #e8eaf6, #c5cae9);
-    border-left: 5px solid var(--purple);
-  }
-
-  [data-theme="dark"] .carte {
-    background: linear-gradient(180deg, #24263E, #1e2035);
-  }
-
-  .carte .section-header {
-    background: var(--gradient-carte);
-  }
-
-  .carte-content {
-    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
-  }
-
-  .carte-content h4 {
-    color: var(--purple);
-    font-size: 1.2em;
-    margin-bottom: var(--spacing-md);
-    font-weight: 600;
-  }
-
-  .carte-map-placeholder {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border: 2px dashed var(--purple);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xl);
-    text-align: center;
-    margin: var(--spacing-lg) 0;
-  }
-
-  [data-theme="dark"] .carte-map-placeholder {
-    background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
-  }
-
-  .carte-map-icon {
-    font-size: 3em;
-    margin-bottom: var(--spacing-sm);
-    opacity: 0.8;
-  }
-
-  .carte-legend-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 14px;
-    margin-top: 20px;
-  }
-
-  .carte-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 0.9em;
-    padding: 14px;
-    background: var(--bg-white);
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-  }
-
-  [data-theme="dark"] .carte-legend-item {
-    border-color: #444444;
-  }
-
-  .carte-legend-color {
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    flex-shrink: 0;
-    border: 1px solid rgba(0,0,0,0.1);
-  }
-
-  /* Bilan */
-  .bilan {
-    background: linear-gradient(180deg, #eceff1, #cfd8dc);
-    border-left: 5px solid var(--bilan);
-  }
-
-  [data-theme="dark"] .bilan {
-    background: linear-gradient(180deg, #3a3d40, #2f3235);
-  }
-
-  .bilan .section-header {
-    background: var(--gradient-bilan);
-  }
-
-  .bilan-content {
-    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
-  }
-
-  .bilan-highlight-box {
-    background: var(--bg-white);
-    border: 2px solid var(--bilan);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .bilan-highlight-box h3 {
-    margin: 0 0 var(--spacing-sm) 0;
-    color: var(--bilan);
-    font-weight: 600;
-    font-size: 1em;
-  }
-
-  .bilan-highlight-box h5 {
-    margin: var(--spacing-md) 0 var(--spacing-sm) 0;
-    color: var(--bilan);
-    font-weight: 600;
-    font-size: 1em;
-    text-transform: uppercase;
-  }
-
-  /* Carte mentale */
-  .carte-mentale {
-    background: linear-gradient(180deg, #fefce8, #fef3c7);
-    border-left: 5px solid #E9AC16;
-  }
-
-  [data-theme="dark"] .carte-mentale {
-    background: linear-gradient(180deg, #453f2e, #3a341f);
-  }
-
-  .carte-mentale .section-header {
-    background: var(--gradient-carte-mentale);
-  }
-
-  .carte-mentale-content {
-    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
-  }
-
-  .carte-mentale-content h4 {
-    color: #E9AC16;
-    font-size: 1.2em;
-    margin-bottom: var(--spacing-md);
-    font-weight: 600;
-  }
-
-  .carte-mentale-placeholder {
-    background: linear-gradient(135deg, #fefce8, #fef3c7);
-    border: 2px dashed #E9AC16;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xl);
-    text-align: center;
-    margin: var(--spacing-lg) 0;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  [data-theme="dark"] .carte-mentale-placeholder {
-    background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
-  }
-
-  .carte-mentale-icon {
-    font-size: 3em;
-    margin-bottom: var(--spacing-sm);
-    opacity: 0.8;
-    color: #E9AC16;
-  }
-
-  .carte-mentale-subtitle {
-    color: #ca8a04;
-    font-style: italic;
-    margin-top: var(--spacing-sm);
-    font-size: 0.9em;
-  }
-
-  [data-theme="dark"] .carte-mentale-subtitle {
-    color: #fbbf24;
-  }
-
-  /* Image de la carte mentale */
-  .carte-mentale-image-container {
-    max-width: 1000px;
-    margin: 0 auto var(--spacing-xl);
-    text-align: center;
-    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
-  }
-  
-  .carte-mentale-image {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    border: 3px solid #E9AC16;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: var(--bg-white);
-    padding: 10px;
-  }
-  
-  .carte-mentale-image:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 32px rgba(233, 172, 22, 0.25);
-  }
-  
-  .carte-mentale-caption {
-    margin-top: var(--spacing-md);
-    color: var(--text-muted);
-    font-size: 0.9em;
-    font-style: italic;
-  }
-  
-  [data-theme="dark"] .carte-mentale-caption {
-    color: #b8b8b8;
-  }
-  
-  [data-theme="dark"] .carte-mentale-image {
-    background: var(--bg-white);
-  }
-
-  .carte-mentale-concepts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-  }
-
-  .concept-item {
-    background: var(--bg-white);
-    padding: var(--spacing-md);
-    border-radius: var(--radius-md);
-    border-left: 4px solid #E9AC16;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .concept-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(233, 172, 22, 0.15);
-  }
-
-  .concept-title {
-    font-weight: 600;
-    color: #E9AC16;
-    margin-bottom: var(--spacing-sm);
-    font-size: 0.9em;
-    text-transform: uppercase;
-  }
-
-  [data-theme="dark"] .concept-title {
-    color: #fbbf24;
-  }
-
-  .concept-description {
-    font-size: 0.85em;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-
-  [data-theme="dark"] .concept-description {
-    color: #b0b0b0;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiche de Synthèse - Histoire 4e - L'Europe des Lumières</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #0ea5e9;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #ec4899;
+      --purple: #413BDD;
+      --bilan: #64748b;
+
+      --bg-white: #ffffff;
+      --bg-light: #f8fafc;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #ffffff;
+
+      --spacing-sm: 12px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+
+      --radius-md: 12px;
+      --radius-lg: 16px;
+
+      --shadow-sm: 0 2px 8px rgba(108, 92, 231, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+      --gradient-primary: linear-gradient(100deg, var(--primary), #a5b4fc);
+      --gradient-secondary: linear-gradient(100deg, var(--secondary), #7dd3fc);
+      --gradient-success: linear-gradient(100deg, var(--success), #6ee7b7);
+      --gradient-warning: linear-gradient(100deg, var(--warning), #fbbf24);
+      --gradient-danger: linear-gradient(100deg, var(--danger), #f87171);
+      --gradient-info: linear-gradient(100deg, var(--info), #f472b6);
+      --gradient-carte: linear-gradient(100deg, var(--purple), #7490FF);
+      --gradient-bilan: linear-gradient(100deg, var(--bilan), #9EA9AD);
+      --gradient-carte-mentale: linear-gradient(100deg, #E9AC16, #fbbf24);
+    }
+
+    [data-theme="dark"] {
+      --bg-light: #292929;
+      --bg-white: #3a3a3a;
+      --text-dark: #e8e8e8;
+      --text-muted: #b8b8b8;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding-top: 80px;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border-bottom: 2px solid #e9ecef;
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 10px 20px;
+    }
+
+    [data-theme="dark"] .toolbar {
+      background: linear-gradient(135deg, #2e2e2e 0%, #2e2e2e 100%);
+      border-bottom-color: #444444;
+    }
+
+    .toolbar-btn {
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+    }
+
+    .toolbar-btn:hover { transform: translateY(-2px); }
+
+    .btn-theme { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+    .btn-print { background: linear-gradient(135deg, #4BC01B, #3A9415); }
+    .btn-font  { background: linear-gradient(135deg, #fd79a8, #e84393); }
+
+    /* Contenu principal */
     .content {
-      padding: var(--spacing-md);
-      margin: 15px;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 30px;
     }
 
-    .cards-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-md);
+    /* En-tête */
+    .chapter-header {
+      text-align: center;
+      margin: 0 auto 40px;
+      padding: 25px;
+      background: linear-gradient(#E6834C, #7362EA);
+      color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
     }
 
-    .card {
-      padding: var(--spacing-md) var(--spacing-lg);
-    }
-
-    .section-header {
-      font-size: 1.1em;
-      padding: var(--spacing-sm) var(--spacing-md);
+    .theme-title {
+      font-size: 20px;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 20px;
     }
 
     .chapter-title {
-      font-size: 1.5em;
-    }
-  }
-
-  @media (max-width: 480px) {
-    body { padding-top: 70px; }
-    
-    .toolbar {
-      height: 70px;
-      padding: 8px 12px;
-      gap: 8px;
-    }
-    
-    .toolbar-btn {
-      padding: 8px 12px;
-      font-size: 12px;
+      margin: 12px 0;
+      font-size: 2em;
+      font-weight: 700;
+      line-height: 1.2;
     }
 
-    .content {
-      margin: 10px;
-      padding: 15px;
+    .chapter-number {
+      font-size: 20px;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-top: 2px;
     }
-  }
 
-  /* Print */
-  @media print {
-    .toolbar { display: none !important; }
-    
-    body {
-      background: white !important;
-      padding-top: 0 !important;
-      font-size: 12pt !important;
-    }
-    
+    /* Sections */
     .section {
-      page-break-inside: avoid;
-      margin-bottom: 15pt !important;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
     }
-    
-    .chapter-header {
-      background: linear-gradient(#E6834C, #7362EA) !important;
-      color: white !important;
-      page-break-inside: avoid;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-md) var(--spacing-lg);
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--text-light);
     }
-    
+
+    .section-badge {
+      background: rgba(255,255,255,0.25);
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+    }
+
     .card {
-      background: white !important;
-      border: 1pt solid #ccc !important;
-      page-break-inside: avoid;
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg) var(--spacing-xl);
+      box-shadow: var(--shadow-sm);
+      border: 2px solid;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-  }
 
-  /* Notification simple */
-  .notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 10000;
-    background: #74b9ff;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    animation: slideIn 0.3s ease-out;
-  }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(108, 92, 231, 0.15);
+    }
 
-  .notification.success { background: #00b894; }
-  .notification.error { background: #d63031; }
+    .list-styled {
+      list-style: none;
+      padding-left: 10px;
+      margin: 0;
+    }
 
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(300px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-</style>
+    .list-styled li {
+      position: relative;
+      margin: var(--spacing-md) 0;
+      line-height: 1.5;
+      font-size: 0.95em;
+      padding-left: 35px;
+    }
+
+    .list-styled li::before {
+      content: '●';
+      position: absolute;
+      left: 0; top: 0;
+      font-size: 1em;
+    }
+
+    /* Problématique */
+    .problematique {
+      background: linear-gradient(180deg, #f1efff, #e8e5ff);
+      border-left: 5px solid var(--primary);
+    }
+
+    [data-theme="dark"] .problematique {
+      background: linear-gradient(180deg, #3a3650, #2f2d45);
+    }
+
+    .problematique .section-header { background: var(--gradient-primary); }
+
+    .problematique-content {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-left: 4px solid var(--primary);
+    }
+
+    .problematique-highlight-box {
+      background: var(--bg-white);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      box-shadow: var(--shadow-md);
+    }
+
+    .problematique-highlight-box h4 {
+      font-size: 1.1em;
+      margin: 0 0 var(--spacing-sm);
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .problematique .list-styled li::before { content: '●'; color: var(--primary); }
+
+    /* Plan */
+    .plan {
+      background: linear-gradient(180deg, #e6f3ff, #ddeeff);
+      border-left: 5px solid var(--secondary);
+    }
+
+    [data-theme="dark"] .plan {
+      background: linear-gradient(180deg, #2e3950, #242945);
+    }
+
+    .plan .section-header { background: var(--gradient-secondary); }
+
+    .plan .card:nth-child(1) { border-color: #3b82f6; }
+    .plan .card:nth-child(2) { border-color: #27ae60; }
+    .plan .card:nth-child(3) { border-color: #8e44ad; }
+    .plan .card:nth-child(4) { border-color: #e74c3c; }
+
+    .plan-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .plan-card-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--text-light);
+      font-size: 1em;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .plan .card:nth-child(1) .plan-card-icon { background: #3b82f6; }
+    .plan .card:nth-child(2) .plan-card-icon { background: #27ae60; }
+    .plan .card:nth-child(3) .plan-card-icon { background: #8e44ad; }
+    .plan .card:nth-child(4) .plan-card-icon { background: #e74c3c; }
+
+    .plan .card:nth-child(1) h3 { color: #3b82f6; }
+    .plan .card:nth-child(2) h3 { color: #27ae60; }
+    .plan .card:nth-child(3) h3 { color: #8e44ad; }
+    .plan .card:nth-child(4) h3 { color: #e74c3c; }
+
+    .plan-card-title {
+      font-size: 1.1em;
+      margin: 0;
+      line-height: 1.5;
+      font-weight: 600;
+      flex-grow: 1;
+    }
+
+    /* Compétences */
+    .competences {
+      background: linear-gradient(180deg, #e6f6f0, #dff5ec);
+      border-left: 5px solid var(--success);
+    }
+
+    [data-theme="dark"] .competences {
+      background: linear-gradient(180deg, #2e4f40, #243936);
+    }
+
+    .competences .section-header { background: var(--gradient-success); }
+    .competences .card { border-color: var(--success); }
+
+    .competences-title {
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      font-size: 1.1em;
+      color: var(--success);
+      text-transform: uppercase;
+    }
+
+    [data-theme="dark"] .competences-title { color: #6ee7b7; }
+    .competences .list-styled li::before { color: var(--success); }
+
+    /* Vocabulaire */
+    .vocabulaire {
+      background: linear-gradient(180deg, #fef7ed, #fed7aa);
+      border-left: 5px solid var(--warning);
+    }
+
+    [data-theme="dark"] .vocabulaire {
+      background: linear-gradient(180deg, #4d4230, #3d3628);
+    }
+
+    .vocabulaire .section-header { background: var(--gradient-warning); }
+    .vocabulaire .card { border-color: var(--warning); }
+    .vocabulaire .list-styled li::before { color: var(--warning); }
+
+    .vocab-term {
+      font-weight: 700;
+      color: var(--warning);
+      text-transform: uppercase;
+      display: inline;
+      margin-right: 8px;
+    }
+
+    .vocab-definition {
+      font-weight: 400;
+      color: var(--text-dark);
+      text-transform: none;
+      display: inline;
+    }
+
+    [data-theme="dark"] .vocab-term { color: #fbbf24; }
+    [data-theme="dark"] .vocab-definition { color: #ffffff; }
+
+    .vocab-category-title {
+      font-weight: 700;
+      color: var(--warning);
+      font-size: 1.1em;
+      margin-bottom: var(--spacing-sm);
+      text-transform: uppercase;
+      text-align: center;
+      padding-bottom: 8px;
+    }
+
+    [data-theme="dark"] .vocab-category-title { color: #fbbf24; }
+
+    .vocabulaire .card:nth-child(1) { border-color: #3b82f6; }
+    .vocabulaire .card:nth-child(2) { border-color: #27ae60; }
+    .vocabulaire .card:nth-child(3) { border-color: #8e44ad; }
+    .vocabulaire .card:nth-child(4) { border-color: #e74c3c; }
+    .vocabulaire .card:nth-child(5) { border-color: #f39c12; }
+
+    .vocabulaire .card:nth-child(1) .vocab-category-title { color: #3b82f6; }
+    .vocabulaire .card:nth-child(2) .vocab-category-title { color: #27ae60; }
+    .vocabulaire .card:nth-child(3) .vocab-category-title { color: #8e44ad; }
+    .vocabulaire .card:nth-child(4) .vocab-category-title { color: #e74c3c; }
+    .vocabulaire .card:nth-child(5) .vocab-category-title { color: #f39c12; }
+
+    .vocabulaire .card:nth-child(1) .vocab-term { color: #3b82f6; }
+    .vocabulaire .card:nth-child(2) .vocab-term { color: #27ae60; }
+    .vocabulaire .card:nth-child(3) .vocab-term { color: #8e44ad; }
+    .vocabulaire .card:nth-child(4) .vocab-term { color: #e74c3c; }
+    .vocabulaire .card:nth-child(5) .vocab-term { color: #f39c12; }
+
+    .vocabulaire .card:nth-child(1) .list-styled li::before { color: #3b82f6; }
+    .vocabulaire .card:nth-child(2) .list-styled li::before { color: #27ae60; }
+    .vocabulaire .card:nth-child(3) .list-styled li::before { color: #8e44ad; }
+    .vocabulaire .card:nth-child(4) .list-styled li::before { color: #e74c3c; }
+    .vocabulaire .card:nth-child(5) .list-styled li::before { color: #f39c12; }
+
+    /* Onglets vocabulaire – pilules */
+    .vocab-tabs {
+      display: flex;
+      gap: 10px;
+      padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-sm);
+      background: transparent;
+    }
+
+    .vocab-tab-btn {
+      padding: 10px 28px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.18);
+      color: var(--warning);
+      font-weight: 600;
+      font-size: 0.92em;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+      font-family: 'Roboto', Arial, sans-serif;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+    }
+
+    .vocab-tab-btn:hover:not(.active) {
+      background: rgba(245, 158, 11, 0.30);
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .vocab-tab-btn.active {
+      background: var(--gradient-warning);
+      color: white;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+      transform: translateY(-1px);
+    }
+
+    [data-theme="dark"] .vocab-tab-btn {
+      background: rgba(251, 191, 36, 0.18);
+      color: #fbbf24;
+    }
+
+    [data-theme="dark"] .vocab-tab-btn:hover:not(.active) {
+      background: rgba(251, 191, 36, 0.30);
+    }
+
+    [data-theme="dark"] .vocab-tab-btn.active {
+      background: linear-gradient(100deg, #f59e0b, #fbbf24);
+      color: #1e293b;
+    }
+
+    .vocab-tab-content { display: none; }
+    .vocab-tab-content.active { display: block; }
+
+    /* Couleurs vocab par parties (identiques plan) */
+    #vocab-parties-grid .card:nth-child(1) { border-color: #3b82f6; }
+    #vocab-parties-grid .card:nth-child(2) { border-color: #27ae60; }
+    #vocab-parties-grid .card:nth-child(3) { border-color: #8e44ad; }
+
+    #vocab-parties-grid .card:nth-child(1) .vocab-category-title { color: #3b82f6; }
+    #vocab-parties-grid .card:nth-child(2) .vocab-category-title { color: #27ae60; }
+    #vocab-parties-grid .card:nth-child(3) .vocab-category-title { color: #8e44ad; }
+
+    #vocab-parties-grid .card:nth-child(1) .vocab-term { color: #3b82f6; }
+    #vocab-parties-grid .card:nth-child(2) .vocab-term { color: #27ae60; }
+    #vocab-parties-grid .card:nth-child(3) .vocab-term { color: #8e44ad; }
+
+    #vocab-parties-grid .card:nth-child(1) .list-styled li::before { color: #3b82f6; }
+    #vocab-parties-grid .card:nth-child(2) .list-styled li::before { color: #27ae60; }
+    #vocab-parties-grid .card:nth-child(3) .list-styled li::before { color: #8e44ad; }
+
+    /* Dates */
+    .dates {
+      background: linear-gradient(180deg, #ffe8e8, #ffd6d6);
+      border-left: 5px solid var(--danger);
+    }
+
+    [data-theme="dark"] .dates {
+      background: linear-gradient(180deg, #4d3030, #3d2828);
+    }
+
+    .dates .section-header { background: var(--gradient-danger); }
+
+    .dates-content { padding: var(--spacing-md) var(--spacing-lg); }
+
+    .dates-highlight-box {
+      background: var(--bg-white);
+      border: 2px solid var(--danger);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      box-shadow: var(--shadow-md);
+    }
+
+    .dates-highlight-box h4 {
+      font-size: 1.1em;
+      margin: 0 0 var(--spacing-sm);
+      color: var(--danger);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .dates .list-styled li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      margin: var(--spacing-sm) 0;
+      padding-left: 0;
+    }
+
+    .dates .list-styled li::before { content: none; }
+
+    .date-major {
+      font-weight: 700;
+      color: var(--danger);
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+
+    .date-event { color: var(--text-dark); line-height: 1.4; }
+
+    /* Personnages */
+    .personnages {
+      background: linear-gradient(180deg, #ffe6f0, #ffcce0);
+      border-left: 5px solid var(--info);
+    }
+
+    [data-theme="dark"] .personnages {
+      background: linear-gradient(180deg, #4d3040, #3d2836);
+    }
+
+    .personnages .section-header { background: var(--gradient-info); }
+    .personnages .card { border-color: var(--info); }
+
+    .personnages-title {
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      font-size: 1.1em;
+      color: var(--info);
+      text-transform: uppercase;
+    }
+
+    [data-theme="dark"] .personnages-title { color: #f472b6; }
+
+    .personnages-dates {
+      font-style: italic;
+      color: #5a6571;
+      margin-bottom: 8px;
+      font-size: 0.9em;
+    }
+
+    [data-theme="dark"] .personnages-dates { color: #b8b8b8; }
+
+    /* Carte */
+    .carte {
+      background: linear-gradient(180deg, #e8eaf6, #c5cae9);
+      border-left: 5px solid var(--purple);
+    }
+
+    [data-theme="dark"] .carte {
+      background: linear-gradient(180deg, #24263E, #1e2035);
+    }
+
+    .carte .section-header { background: var(--gradient-carte); }
+
+    .carte-content {
+      padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+    }
+
+    .carte-content h4 {
+      color: var(--purple);
+      font-size: 1.2em;
+      margin-bottom: var(--spacing-md);
+      font-weight: 600;
+    }
+
+    .carte-map-placeholder {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border: 2px dashed var(--purple);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-xl);
+      text-align: center;
+      margin: var(--spacing-lg) 0;
+    }
+
+    [data-theme="dark"] .carte-map-placeholder {
+      background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+    }
+
+    /* Bilan */
+    .bilan {
+      background: linear-gradient(180deg, #eceff1, #cfd8dc);
+      border-left: 5px solid var(--bilan);
+    }
+
+    [data-theme="dark"] .bilan {
+      background: linear-gradient(180deg, #3a3d40, #2f3235);
+    }
+
+    .bilan .section-header { background: var(--gradient-bilan); }
+
+    .bilan-content {
+      padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+    }
+
+    .bilan-highlight-box {
+      background: var(--bg-white);
+      border: 2px solid var(--bilan);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bilan-highlight-box h4 {
+      margin: 0 0 var(--spacing-sm) 0;
+      color: var(--bilan);
+      font-weight: 600;
+      font-size: 1em;
+    }
+
+    .bilan-highlight-box h5 {
+      margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+      color: var(--bilan);
+      font-weight: 600;
+      font-size: 1em;
+      text-transform: uppercase;
+    }
+
+    /* Carte mentale */
+    .carte-mentale {
+      background: linear-gradient(180deg, #fefce8, #fef3c7);
+      border-left: 5px solid #E9AC16;
+    }
+
+    [data-theme="dark"] .carte-mentale {
+      background: linear-gradient(180deg, #453f2e, #3a341f);
+    }
+
+    .carte-mentale .section-header { background: var(--gradient-carte-mentale); }
+
+    .carte-mentale-content {
+      padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+    }
+
+    .carte-mentale-content h4 {
+      color: #E9AC16;
+      font-size: 1.2em;
+      margin-bottom: var(--spacing-md);
+      font-weight: 600;
+    }
+
+    .carte-mentale-placeholder {
+      background: linear-gradient(135deg, #fefce8, #fef3c7);
+      border: 2px dashed #E9AC16;
+      border-radius: var(--radius-md);
+      padding: var(--spacing-xl);
+      text-align: center;
+      margin: var(--spacing-lg) 0;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    [data-theme="dark"] .carte-mentale-placeholder {
+      background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+    }
+
+    .carte-mentale-icon {
+      font-size: 3em;
+      margin-bottom: var(--spacing-sm);
+      opacity: 0.8;
+      color: #E9AC16;
+    }
+
+    .carte-mentale-subtitle {
+      color: #ca8a04;
+      font-style: italic;
+      margin-top: var(--spacing-sm);
+      font-size: 0.9em;
+    }
+
+    [data-theme="dark"] .carte-mentale-subtitle { color: #fbbf24; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .content { padding: var(--spacing-md); margin: 15px; }
+      .cards-grid { grid-template-columns: 1fr; gap: var(--spacing-md); }
+      .card { padding: var(--spacing-md) var(--spacing-lg); }
+      .section-header { font-size: 1.1em; padding: var(--spacing-sm) var(--spacing-md); }
+      .chapter-title { font-size: 1.5em; }
+      .vocab-tabs { flex-wrap: wrap; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding-top: 70px; }
+      .toolbar { height: 70px; padding: 8px 12px; gap: 8px; }
+      .toolbar-btn { padding: 8px 12px; font-size: 12px; }
+      .content { margin: 10px; padding: 15px; }
+    }
+
+    /* =====================================================
+       IMPRESSION – version optimisée
+    ===================================================== */
+    @media print {
+      .toolbar, .vocab-tabs { display: none !important; }
+      .vocab-tab-content { display: block !important; }
+      #vocab-tab-parties { margin-top: 12pt; }
+
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+
+      body {
+        background: white !important;
+        color: #000 !important;
+        padding-top: 0 !important;
+        font-size: 10pt !important;
+        font-family: 'Georgia', serif !important;
+        margin: 0 !important;
+      }
+
+      .content { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+      .chapter-header {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+        border: 1.5pt solid #999 !important;
+        border-radius: 6pt !important;
+        padding: 12pt !important;
+        margin-bottom: 14pt !important;
+        page-break-after: avoid;
+      }
+
+      .theme-title { color: #333 !important; }
+      .chapter-number { color: #555 !important; }
+
+      .section {
+        background: white !important;
+        border-left-width: 3pt !important;
+        border-radius: 0 !important;
+        margin-bottom: 14pt !important;
+        padding: 0 !important;
+        page-break-inside: avoid;
+      }
+
+      .section-header {
+        background: #e8e8e8 !important;
+        color: #000 !important;
+        font-size: 11pt !important;
+        padding: 5pt 10pt !important;
+        border-radius: 0 !important;
+        page-break-after: avoid;
+      }
+
+      .section-badge { background: #555 !important; color: white !important; }
+
+      .card {
+        background: white !important;
+        border: 0.75pt solid #ccc !important;
+        border-radius: 4pt !important;
+        padding: 8pt 10pt !important;
+        page-break-inside: avoid;
+      }
+
+      .cards-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8pt !important;
+      }
+
+      .plan-card-icon { background: #555 !important; color: white !important; }
+
+      .vocab-category-title,
+      .competences-title,
+      .personnages-title {
+        color: #000 !important;
+        border-bottom: 0.5pt solid #ccc;
+        padding-bottom: 3pt;
+        margin-bottom: 5pt;
+      }
+
+      .vocab-term { color: #000 !important; font-weight: 700 !important; }
+      .vocab-definition { color: #333 !important; }
+      .date-major { color: #000 !important; font-weight: 700 !important; }
+      .date-event { color: #333 !important; }
+      .personnages-dates { color: #555 !important; }
+
+      .dates-highlight-box {
+        background: #f5f5f5 !important;
+        border: 0.5pt solid #ccc !important;
+        border-radius: 3pt !important;
+        page-break-inside: avoid;
+      }
+
+      .problematique-highlight-box {
+        background: #f5f5f5 !important;
+        border: 0.5pt solid #ccc !important;
+      }
+
+      .bilan-highlight-box {
+        background: #f5f5f5 !important;
+        border: 0.5pt solid #ccc !important;
+        page-break-inside: avoid;
+      }
+
+      .carte-image { max-width: 100% !important; page-break-inside: avoid; }
+
+      .section.plan,
+      .section.personnages,
+      .section.carte,
+      .section.bilan,
+      .section.carte-mentale {
+        page-break-before: auto;
+      }
+
+      .list-styled li::before { color: #555 !important; }
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px; right: 20px;
+      z-index: 10000;
+      background: #74b9ff;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .notification.success { background: #00b894; }
+    .notification.error { background: #d63031; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(300px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
 </head>
 
 <body>
@@ -894,14 +854,16 @@
 
 <!-- Contenu principal -->
 <div class="content">
+
   <!-- EN-TÊTE -->
   <header class="chapter-header">
-    <div class="theme-title">HISTOIRE 4e - THÈME 1</div>
+    <div class="theme-title">HISTOIRE 4e — THÈME 1</div>
     <h1 class="chapter-title">L'EUROPE DES LUMIÈRES</h1>
     <div class="chapter-number">CHAPITRE 2</div>
   </header>
-  
+
   <!-- PROBLÉMATIQUE -->
+  <div id="s-problematique"></div>
   <section class="section problematique">
     <div class="section-header">
       <div class="section-badge">1</div>
@@ -916,224 +878,86 @@
       </div>
     </div>
   </section>
-  
+
   <!-- PLAN -->
+  <div id="s-plan"></div>
   <section class="section plan">
     <div class="section-header">
       <div class="section-badge">2</div>
       <span>📋 PLAN DU CHAPITRE</span>
     </div>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="plan-card-header">
-          <div class="plan-card-icon">I</div>
-          <h3 class="plan-card-title">LA SOCIÉTÉ D'ANCIEN RÉGIME : L'ABSOLUTISME</h3>
-        </div>
-        <div class="plan-card-content">
-          <p>Cette partie présente les régimes politiques en Europe au XVIIIe siècle, dominés par les monarchies absolues de droit divin. Elle analyse également la société française profondément inégalitaire, divisée en trois ordres (noblesse, clergé, tiers état), où les privilèges et les obligations varient considérablement selon l'appartenance sociale.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="plan-card-header">
-          <div class="plan-card-icon">II</div>
-          <h3 class="plan-card-title">LE SIÈCLE DES LUMIÈRES</h3>
-        </div>
-        <div class="plan-card-content">
-          <p>Cette partie étudie l'émergence des philosophes des Lumières qui utilisent la raison pour contester l'absolutisme royal, la société d'ordres et l'intolérance religieuse. Ils défendent des idées révolutionnaires comme la séparation des pouvoirs, l'égalité devant la loi, et les libertés fondamentales (culte, opinion, presse).</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="plan-card-header">
-          <div class="plan-card-icon">III</div>
-          <h3 class="plan-card-title">LA DIFFUSION DES LUMIÈRES</h3>
-        </div>
-        <div class="plan-card-content">
-          <p>Cette partie analyse comment les idées des Lumières se propagent dans la société européenne grâce à l'Encyclopédie, la multiplication des écrits, des salons et des cafés littéraires. Elle montre l'émergence d'une opinion publique critique envers l'absolutisme et l'influence limitée du despotisme éclairé pratiqué par certains souverains européens.</p>
-        </div>
-      </div>
+    <div class="cards-grid" id="plan-cards-grid">
+      <!-- Généré dynamiquement par JS -->
     </div>
   </section>
-  
+
   <!-- COMPÉTENCES -->
+  <div id="s-competences"></div>
   <section class="section competences">
     <div class="section-header">
       <div class="section-badge">3</div>
       <span>🎯 COMPÉTENCES</span>
     </div>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="competences-title">⏳ SE REPÉRER DANS LE TEMPS</div>
-        <ul class="list-styled">
-          <li>Situer chronologiquement les grands événements du siècle des Lumières (publication de l'Encyclopédie 1751-1772, règnes des despotes éclairés)</li>
-          <li>Identifier les évolutions de la pensée politique et sociale au XVIIIe siècle</li>
-          <li>Établir des liens entre les idées des Lumières et la transformation des sociétés européennes à venir</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="competences-title">🗺️ SE REPÉRER DANS L'ESPACE</div>
-        <ul class="list-styled">
-          <li>Localiser les principaux États européens au XVIIIe siècle et identifier leurs régimes politiques</li>
-          <li>Repérer les centres de diffusion des idées des Lumières (Paris, salons, académies)</li>
-          <li>Situer les territoires des despotes éclairés en Europe (Prusse, Russie, Autriche)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="competences-title">🔍 ANALYSER ET COMPRENDRE UN DOCUMENT</div>
-        <ul class="list-styled">
-          <li>Extraire des informations d'un texte philosophique des Lumières (extraits de Voltaire, Montesquieu, Rousseau, Diderot)</li>
-          <li>Analyser des images représentant la société d'ordres et ses inégalités</li>
-          <li>Comprendre les messages véhiculés par l'Encyclopédie et autres supports de diffusion des idées</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="competences-title">💭 RAISONNER ET JUSTIFIER</div>
-        <ul class="list-styled">
-          <li>Expliquer pourquoi les philosophes contestent l'ordre établi (absolutisme, privilèges, intolérance)</li>
-          <li>Justifier l'importance de la raison dans la pensée des Lumières</li>
-          <li>Argumenter sur les limites du despotisme éclairé malgré certaines réformes</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="competences-title">🤝 COOPÉRER ET MUTUALISER</div>
-        <ul class="list-styled">
-          <li>Participer à des débats sur les idées des Lumières et leur actualité</li>
-          <li>Travailler en groupe pour présenter les différents philosophes et leurs contributions</li>
-          <li>Partager des recherches sur la diffusion des idées et l'opinion publique au XVIIIe siècle</li>
-        </ul>
-      </div>
+    <div class="cards-grid" id="competences-grid">
+      <!-- Généré dynamiquement par JS -->
     </div>
   </section>
-  
+
   <!-- VOCABULAIRE -->
+  <div id="s-vocabulaire"></div>
   <section class="section vocabulaire">
     <div class="section-header">
       <div class="section-badge">4</div>
       <span>📚 VOCABULAIRE</span>
     </div>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="vocab-category-title">👑 RÉGIMES POLITIQUES</div>
-        <ul class="list-styled">
-          <li><span class="vocab-term">Monarchie absolue :</span><span class="vocab-definition">Régime politique dans lequel le souverain détient tous les pouvoirs (législatif, exécutif, judiciaire) sans partage ni contrôle institutionnel.</span></li>
-          <li><span class="vocab-term">Monarchie de droit divin :</span><span class="vocab-definition">Régime dans lequel le souverain tient ses pouvoirs directement de Dieu, rendant son autorité sacrée et incontestable par les hommes.</span></li>
-          <li><span class="vocab-term">Monarchie parlementaire :</span><span class="vocab-definition">Le roi partage le pouvoir avec un Parlement élu.</span></li>
-          <li><span class="vocab-term">République :</span><span class="vocab-definition">Régime politique sans roi où le pouvoir appartient au peuple qui l'exerce par l'intermédiaire de représentants élus.</span></li>
-          <li><span class="vocab-term">Despotisme éclairé :</span><span class="vocab-definition">Forme de gouvernement absolu où le souverain entreprend des réformes inspirées des Lumières pour moderniser l'État, tout en conservant l'intégralité de son pouvoir politique.</span></li>
-        </ul>
+
+    <!-- Onglets -->
+    <div class="vocab-tabs">
+      <button class="vocab-tab-btn active" onclick="switchVocabTab('thematique', this)">🗂️ Par thème</button>
+      <button class="vocab-tab-btn" onclick="switchVocabTab('parties', this)">📋 Par partie</button>
+    </div>
+
+    <!-- Onglet 1 : Par thème -->
+    <div id="vocab-tab-thematique" class="vocab-tab-content active">
+      <div class="cards-grid" id="vocab-thematique-grid">
+        <!-- Généré dynamiquement par JS -->
       </div>
-      <div class="card">
-        <div class="vocab-category-title">⚖️ SOCIÉTÉ D'ANCIEN RÉGIME</div>
-        <ul class="list-styled">
-          <li><span class="vocab-term">Société d'ordres :</span><span class="vocab-definition">Organisation sociale hiérarchisée en trois catégories distinctes définies par la naissance : la noblesse, le clergé et le tiers état, chacune ayant des droits et devoirs spécifiques.</span></li>
-          <li><span class="vocab-term">Privilèges :</span><span class="vocab-definition">Avantages réservés à la noblesse et au clergé, comme l'exemption d'impôts.</span></li>
-          <li><span class="vocab-term">Bourgeoisie :</span><span class="vocab-definition">Élite urbaine du tiers état qui s'est enrichie par le grand commerce, la banque ou l'exercice de certaines professions (avocats, médecins, notaires).</span></li>
-          <li><span class="vocab-term">Noblesse :</span><span class="vocab-definition">Ordre social privilégié composé de l'ancienne noblesse d'épée et des bourgeois ayant acheté un titre.</span></li>
-          <li><span class="vocab-term">Tiers état :</span><span class="vocab-definition">97% de la population française sans privilèges qui supporte le poids des impôts (paysans, artisans, ouvriers, bourgeois).</span></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="vocab-category-title">💡 PHILOSOPHIE DES LUMIÈRES</div>
-        <ul class="list-styled">
-          <li><span class="vocab-term">Philosophes des Lumières :</span><span class="vocab-definition">Penseurs du XVIIIe siècle qui utilisent la raison pour contester l'ordre établi et défendre la liberté, l'égalité et la tolérance.</span></li>
-          <li><span class="vocab-term">Raison :</span><span class="vocab-definition">Faculté intellectuelle qui permet de distinguer le vrai du faux en s'appuyant sur l'observation, l'expérience et le raisonnement logique, sans recourir aux croyances religieuses ou aux traditions.</span></li>
-          <li><span class="vocab-term">Séparation des pouvoirs :</span><span class="vocab-definition">Principe élaboré par Montesquieu, selon lequel les pouvoirs exécutif, législatif et judiciaire doivent être indépendants.</span></li>
-          <li><span class="vocab-term">Tolérance religieuse :</span><span class="vocab-definition">Principe philosophique et politique de respect des différentes croyances et pratiques religieuses, impliquant le refus des persécutions et de la discrimination fondées sur la religion.</span></li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="vocab-category-title">📖 DIFFUSION DES IDÉES</div>
-        <ul class="list-styled">
-          <li><span class="vocab-term">Encyclopédie :</span><span class="vocab-definition">Ouvrage de 28 volumes (1751-1772) rassemblant les connaissances de l'époque, dirigé par Diderot et D'Alembert.</span></li>
-          <li><span class="vocab-term">Censure :</span><span class="vocab-definition">Contrôle exercé par le pouvoir royal et l'Église sur les publications et les spectacles, permettant d'interdire ou de modifier les œuvres jugées dangereuses pour l'ordre politique ou religieux.</span></li>
-          <li><span class="vocab-term">Opinion publique :</span><span class="vocab-definition">Ensemble des idées partagées par une partie significative de la population sur des questions politiques, sociales ou culturelles.</span></li>
-          <li><span class="vocab-term">Salons :</span><span class="vocab-definition">Lieux de réunion où philosophes, écrivains et artistes débattent des idées nouvelles.</span></li>
-        </ul>
+    </div>
+
+    <!-- Onglet 2 : Par partie -->
+    <div id="vocab-tab-parties" class="vocab-tab-content">
+      <div class="cards-grid" id="vocab-parties-grid">
+        <!-- Généré dynamiquement par JS -->
       </div>
     </div>
   </section>
-  
+
   <!-- DATES CLÉS -->
+  <div id="s-dates"></div>
   <section class="section dates">
     <div class="section-header">
       <div class="section-badge">5</div>
       <span>📅 DATES CLÉS</span>
     </div>
-    <div class="dates-content">
-      <div class="dates-highlight-box">
-        <h4>📚 LES GRANDES ŒUVRES DES LUMIÈRES (1721-1763)</h4>
-        <ul class="list-styled">
-          <li><span class="date-major">1721</span><span class="date-event">Montesquieu publie les "Lettres persanes" qui critiquent avec ironie la société française</span></li>
-          <li><span class="date-major">1734</span><span class="date-event">Voltaire publie les "Lettres philosophiques" où il vante la tolérance religieuse anglaise</span></li>
-          <li><span class="date-major">1748</span><span class="date-event">Montesquieu publie "De l'esprit des lois" et théorise la séparation des pouvoirs</span></li>
-          <li><span class="date-major">1751-1772</span><span class="date-event">Diderot et D'Alembert dirigent la publication de l'Encyclopédie en 28 volumes</span></li>
-          <li><span class="date-major">1759</span><span class="date-event">Louis XV et l'Église catholique condamnent et censurent l'Encyclopédie</span></li>
-          <li><span class="date-major">1762</span><span class="date-event">Rousseau publie "Du Contrat social" et développe l'idée de souveraineté populaire</span></li>
-          <li><span class="date-major">1763</span><span class="date-event">Voltaire s'engage dans l'affaire Calas pour dénoncer l'intolérance religieuse</span></li>
-        </ul>
-      </div>
-      
-      <div class="dates-highlight-box">
-        <h4>👑 LE DESPOTISME ÉCLAIRÉ (1740-1796)</h4>
-        <ul class="list-styled">
-          <li><span class="date-major">1740-1786</span><span class="date-event">Règne de Frédéric II de Prusse, despote éclairé correspondant avec Voltaire</span></li>
-          <li><span class="date-major">1762-1796</span><span class="date-event">Règne de Catherine II de Russie, despote éclairée accueillant Diderot</span></li>
-          <li><span class="date-major">1765-1790</span><span class="date-event">Règne de Joseph II d'Autriche, despote éclairé menant des réformes inspirées des Lumières</span></li>
-        </ul>
-      </div>
-      
-      <div class="dates-highlight-box">
-        <h4>⚡ VERS LA RÉVOLUTION (1774-1789)</h4>
-        <ul class="list-styled">
-          <li><span class="date-major">1774-1792</span><span class="date-event">Règne de Louis XVI en France, période de critique croissante de l'absolutisme</span></li>
-          <li><span class="date-major">1776</span><span class="date-event">Déclaration d'indépendance américaine, inspirée des idées des Lumières</span></li>
-          <li><span class="date-major">1787</span><span class="date-event">Assemblée des notables en France, premiers signes de la crise de l'Ancien Régime</span></li>
-          <li><span class="date-major">1789</span><span class="date-event">Convocation des États généraux et début de la Révolution française</span></li>
-        </ul>
-      </div>
+    <div class="dates-content" id="dates-content">
+      <!-- Généré dynamiquement par JS -->
     </div>
   </section>
 
   <!-- PERSONNAGES -->
+  <div id="s-personnages"></div>
   <section class="section personnages">
     <div class="section-header">
       <div class="section-badge">6</div>
-      <span>👤 PERSONNAGES HISTORIQUES</span>
+      <span>👑 PERSONNAGES HISTORIQUES</span>
     </div>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="personnages-title">VOLTAIRE (François-Marie Arouet)</div>
-        <div class="personnages-dates">1694-1778</div>
-        <div class="personnages-content">Philosophe et écrivain français, figure emblématique des Lumières. Il combat toute sa vie l'intolérance religieuse et le fanatisme. Son engagement pour la tolérance se manifeste notamment dans sa défense de victimes d'injustices judiciaires comme l'affaire Calas (1763). Il correspond avec les despotes éclairés comme Frédéric II de Prusse.</div>
-      </div>
-      <div class="card">
-        <div class="personnages-title">MONTESQUIEU (Charles-Louis de Secondat)</div>
-        <div class="personnages-dates">1689-1755</div>
-        <div class="personnages-content">Philosophe et magistrat français, auteur de "L'Esprit des lois" (1748) où il développe la théorie de la séparation des pouvoirs (exécutif, législatif, judiciaire) pour prévenir le despotisme. Dans "Lettres persanes" (1721), il critique avec ironie la société française et l'absolutisme. Ses idées influenceront profondément les constitutions modernes.</div>
-      </div>
-      <div class="card">
-        <div class="personnages-title">JEAN-JACQUES ROUSSEAU</div>
-        <div class="personnages-dates">1712-1778</div>
-        <div class="personnages-content">Philosophe genevois, auteur du "Contrat social" (1762) qui développe l'idée de souveraineté populaire et d'égalité naturelle entre les hommes. Il affirme que le pouvoir ne vient pas de Dieu mais d'un accord entre citoyens. Contrairement à d'autres philosophes, il valorise les sentiments et la nature. Ses idées sur la démocratie influenceront fortement la Révolution française.</div>
-      </div>
-      <div class="card">
-        <div class="personnages-title">DENIS DIDEROT</div>
-        <div class="personnages-dates">1713-1784</div>
-        <div class="personnages-content">Philosophe et écrivain français, directeur avec D'Alembert de l'Encyclopédie (1751-1772), projet monumental visant à rassembler toutes les connaissances de son temps. Malgré la censure royale et religieuse, il poursuit cette œuvre qui devient le symbole de la diffusion des Lumières. Invité par Catherine II de Russie, il conseille cette despote éclairée sur des réformes.</div>
-      </div>
-      <div class="card">
-        <div class="personnages-title">FRÉDÉRIC II DE PRUSSE</div>
-        <div class="personnages-dates">1740-1786 (règne)</div>
-        <div class="personnages-content">Roi de Prusse incarnant le despotisme éclairé. Grand admirateur des philosophes français, il correspond avec Voltaire qu'il invite à sa cour. Il modernise la Prusse par des réformes dans l'éducation, la justice et l'économie, tout en développant la tolérance religieuse. Cependant, il conserve son pouvoir absolu, illustrant les limites du despotisme éclairé.</div>
-      </div>
-      <div class="card">
-        <div class="personnages-title">CATHERINE II DE RUSSIE</div>
-        <div class="personnages-dates">1762-1796 (règne)</div>
-        <div class="personnages-content">Impératrice de Russie représentant le despotisme éclairé. Admiratrice des Lumières, elle correspond avec les philosophes français et accueille Diderot à Saint-Pétersbourg. Elle entreprend des réformes pour moderniser la Russie (éducation, justice, abolition de la torture) et favorise les arts et les sciences. Néanmoins, elle maintient fermement son pouvoir autocratique, montrant les contradictions du despotisme éclairé.</div>
-      </div>
+    <div class="cards-grid" id="personnages-grid">
+      <!-- Généré dynamiquement par JS -->
     </div>
   </section>
 
   <!-- CARTE -->
+  <div id="s-carte"></div>
   <section class="section carte">
     <div class="section-header">
       <div class="section-badge">7</div>
@@ -1142,13 +966,16 @@
     <div class="carte-content">
       <h4>L'Europe des Lumières et des despotismes éclairés au XVIIIe siècle</h4>
       <div class="carte-map-placeholder">
-        <img src="https://github.com/FarKaas/CHRONOSCOPE-4e-Histoire-CH2/blob/main/Carte.png?raw=true" alt="Carte de l'Europe des Lumières au XVIIIe siècle" style="max-width: 100%; height: auto; border-radius: 8px;">
+        <img src="https://github.com/FarKaas/CHRONOSCOPE-4e-Histoire-CH2/blob/main/index.png?raw=true"
+             alt="Carte de l'Europe des Lumières au XVIIIe siècle"
+             style="max-width: 100%; height: auto; border-radius: 8px;">
       </div>
       <p><strong>Source :</strong> Manuel scolaire Histoire 4e</p>
     </div>
   </section>
-  
+
   <!-- BILAN -->
+  <div id="s-bilan"></div>
   <section class="section bilan">
     <div class="section-header">
       <div class="section-badge">8</div>
@@ -1157,111 +984,474 @@
     <div class="bilan-content">
       <div class="bilan-highlight-box">
         <h4>Synthèse générale</h4>
-        
-        <h5>UNE SOCIÉTÉ PROFONDÉMENT INÉGALITAIRE</h5>
-        <p>Au XVIIIe siècle, l'Europe est dominée par des monarchies absolues de droit divin où les rois concentrent tous les pouvoirs.</p>
-        
-        <p>La société française d'Ancien Régime illustre ces profondes inégalités : divisée en trois ordres (noblesse 2%, clergé 1%, tiers état 97%), elle accorde d'importants privilèges fiscaux et sociaux aux deux premiers ordres. Le tiers état supporte le poids des impôts sans bénéficier d'aucun avantage.</p>
-        
-        <p>Cette organisation sociale rigide est de plus en plus contestée, notamment par la bourgeoisie enrichie qui aspire à davantage de reconnaissance.</p>
-        
-        <h5>LA RÉVOLUTION INTELLECTUELLE DES LUMIÈRES</h5>
-        <p>Les philosophes des Lumières, en s'appuyant sur la raison, remettent radicalement en question l'ordre établi. Voltaire combat l'intolérance religieuse et l'arbitraire. Montesquieu théorise la séparation des pouvoirs pour éviter le despotisme. Rousseau défend l'égalité naturelle des hommes et la souveraineté populaire.</p>
-        
-        <p>Ces penseurs contestent simultanément la monarchie absolue, les privilèges de la société d'ordres et l'intolérance de l'Église. Ils défendent des droits fondamentaux comme les libertés de culte, d'opinion et de presse.</p>
-        
-        <p>Leurs idées audacieuses préparent intellectuellement la transformation des sociétés européennes à venir.</p>
-        
-        <h5>LA CIRCULATION DES IDÉES ET L'ÉMERGENCE D'UNE OPINION PUBLIQUE</h5>
-        <p>Malgré la censure royale et religieuse, les idées des Lumières se diffusent largement dans la société européenne. L'Encyclopédie de Diderot et D'Alembert (1751-1772), œuvre monumentale malgré son interdiction, devient le symbole de cette volonté d'éclairer les esprits.</p>
-        
-        <p>Les livres, journaux et correspondances se multiplient. Les salons littéraires, cafés et académies deviennent des lieux privilégiés d'échanges intellectuels, principalement fréquentés par l'élite cultivée (nobles, bourgeois, philosophes).</p>
-        
-        <p>Cette circulation inédite des idées contribue à former une opinion publique de plus en plus critique envers l'absolutisme et l'Église, préparant le terrain aux bouleversements politiques.</p>
-        
-        <h5>LES LIMITES DU DESPOTISME ÉCLAIRÉ</h5>
-        <p>Certains souverains européens, comme Frédéric II de Prusse, Catherine II de Russie et Joseph II d'Autriche, se montrent réceptifs aux idées des Lumières. Ils entreprennent des réformes significatives dans l'éducation, la justice, l'économie et la tolérance religieuse.</p>
-        
-        <p>Cependant, ce "despotisme éclairé" révèle rapidement ses contradictions : ces monarques utilisent les Lumières pour légitimer et renforcer leur pouvoir absolu plutôt que pour le limiter. Les réformes profitent surtout aux élites, et les structures fondamentales de la société d'ordres restent intactes.</p>
-        
-        <p>Ainsi, malgré quelques avancées, le despotisme éclairé ne répond pas aux aspirations profondes de changement portées par les philosophes. L'émergence du mouvement des Lumières amorce finalement la grande transformation des sociétés européennes.</p>
+        <div id="bilan-aspects">
+          <!-- Généré dynamiquement par JS -->
+        </div>
       </div>
     </div>
   </section>
 
-
   <!-- CARTE MENTALE -->
+  <div id="s-carte-mentale"></div>
   <section class="section carte-mentale">
     <div class="section-header">
       <div class="section-badge">9</div>
       <span>🧠 CARTE MENTALE</span>
     </div>
     <div class="carte-mentale-content">
-      <h4>L'Europe des Lumières : synthèse visuelle</h4>
-      
-      <div class="carte-mentale-image-container">
-        <img src="https://github.com/FarKaas/CHRONOSCOPE-4e-Histoire-CH2/blob/main/Carte%20mentale.png?raw=true" 
-          alt="Carte mentale - L'Europe des Lumières" 
-          class="carte-mentale-image">
-        <p class="carte-mentale-caption">
-          <strong>Thème central :</strong> L'Europe des Lumières - Contestation de l'ordre politique, social et religieux au XVIIIe siècle
-        </p>
+      <h4>L'Europe des Lumières — synthèse visuelle</h4>
+      <div class="carte-mentale-placeholder">
+        <div class="carte-mentale-icon">🧠</div>
+        <p><strong>Carte mentale à venir</strong></p>
+        <p class="carte-mentale-subtitle">Cette section accueillera une carte mentale illustrant les grands axes du chapitre.</p>
       </div>
     </div>
   </section>
-</div>
+
+</div><!-- /.content -->
 
 <script>
-// Variables globales
-let isDarkTheme = false;
-let currentFontSize = 16;
+  // =========================================================
+  // PARAMÈTRE PRINCIPAL
+  // =========================================================
+  const NB_PARTIES = 3;
 
-// Mode sombre/clair
-function toggleTheme() {
-  isDarkTheme = !isDarkTheme;
-  document.body.dataset.theme = isDarkTheme ? 'dark' : '';
-  
-  const btn = document.querySelector('.btn-theme');
-  btn.textContent = isDarkTheme ? '☀️ Clair' : '🌙 Sombre';
-  
-  showNotification(isDarkTheme ? 'Mode sombre activé' : 'Mode clair activé');
-}
+  // =========================================================
+  // DONNÉES DES PARTIES
+  // =========================================================
+  const PARTIES = [
+    {
+      roman: 'I',
+      titre: 'LA SOCIÉTÉ D\'ANCIEN RÉGIME : L\'ABSOLUTISME',
+      description: 'Cette partie présente les régimes politiques en Europe au XVIIIe siècle, dominés par les monarchies absolues de droit divin. Elle analyse également la société française profondément inégalitaire, divisée en trois ordres (noblesse, clergé, tiers état), où les privilèges et les obligations varient considérablement selon l\'appartenance sociale.',
+      bilan_titre: 'UNE SOCIÉTÉ PROFONDÉMENT INÉGALITAIRE',
+      bilan_texte: 'Au XVIIIe siècle, l\'Europe est dominée par des monarchies absolues de droit divin où les rois concentrent tous les pouvoirs. La société française d\'Ancien Régime illustre ces profondes inégalités : divisée en trois ordres (noblesse 2 %, clergé 1 %, tiers état 97 %), elle accorde d\'importants privilèges fiscaux et sociaux aux deux premiers ordres. Le tiers état supporte le poids des impôts sans bénéficier d\'aucun avantage. Cette organisation sociale rigide est de plus en plus contestée, notamment par la bourgeoisie enrichie qui aspire à davantage de reconnaissance.'
+    },
+    {
+      roman: 'II',
+      titre: 'LE SIÈCLE DES LUMIÈRES',
+      description: 'Cette partie étudie l\'émergence des philosophes des Lumières qui utilisent la raison pour contester l\'absolutisme royal, la société d\'ordres et l\'intolérance religieuse. Ils défendent des idées révolutionnaires comme la séparation des pouvoirs, l\'égalité devant la loi, et les libertés fondamentales (culte, opinion, presse).',
+      bilan_titre: 'LA RÉVOLUTION INTELLECTUELLE DES LUMIÈRES',
+      bilan_texte: 'Les philosophes des Lumières, en s\'appuyant sur la raison, remettent radicalement en question l\'ordre établi. Voltaire combat l\'intolérance religieuse et l\'arbitraire. Montesquieu théorise la séparation des pouvoirs pour éviter le despotisme. Rousseau défend l\'égalité naturelle des hommes et la souveraineté populaire. Ces penseurs contestent simultanément la monarchie absolue, les privilèges de la société d\'ordres et l\'intolérance de l\'Église. Ils défendent des droits fondamentaux comme les libertés de culte, d\'opinion et de presse. Leurs idées audacieuses préparent intellectuellement la transformation des sociétés européennes à venir.'
+    },
+    {
+      roman: 'III',
+      titre: 'LA DIFFUSION DES LUMIÈRES',
+      description: 'Cette partie analyse comment les idées des Lumières se propagent dans la société européenne grâce à l\'Encyclopédie, la multiplication des écrits, des salons et des cafés littéraires. Elle montre l\'émergence d\'une opinion publique critique envers l\'absolutisme et l\'influence limitée du despotisme éclairé pratiqué par certains souverains européens.',
+      bilan_titre: 'LA CIRCULATION DES IDÉES ET LES LIMITES DU DESPOTISME ÉCLAIRÉ',
+      bilan_texte: 'Malgré la censure royale et religieuse, les idées des Lumières se diffusent largement. L\'Encyclopédie de Diderot et D\'Alembert (1751-1772), œuvre monumentale malgré son interdiction, devient le symbole de cette volonté d\'éclairer les esprits. Les salons littéraires, cafés et académies contribuent à former une opinion publique de plus en plus critique. Certains souverains comme Frédéric II de Prusse et Catherine II de Russie s\'inspirent des Lumières pour réformer leur État, mais conservent leur pouvoir absolu. Ce « despotisme éclairé » révèle rapidement ses contradictions : les réformes profitent surtout aux élites et les structures fondamentales de la société d\'ordres restent intactes. L\'émergence des Lumières amorce finalement la grande transformation des sociétés européennes.'
+    }
+  ];
 
-// Taille de police
-function changeFontSize() {
-  const sizes = [14, 16, 18, 20, 22];
-  const currentIndex = sizes.indexOf(currentFontSize);
-  const nextIndex = (currentIndex + 1) % sizes.length;
-  currentFontSize = sizes[nextIndex];
-  
-  document.body.style.fontSize = currentFontSize + 'px';
-  
-  const sizeNames = ['Petit', 'Normal', 'Grand', 'Très grand', 'Extra grand'];
-  showNotification(`Taille: ${sizeNames[nextIndex]}`);
-}
+  // Couleurs par partie
+  const PLAN_COLORS = ['#3b82f6', '#27ae60', '#8e44ad', '#e74c3c'];
 
-// Notification simple
-function showNotification(message) {
-  // Supprimer notification existante
-  const existing = document.querySelector('.notification');
-  if (existing) existing.remove();
-  
-  const notification = document.createElement('div');
-  notification.className = 'notification';
-  notification.textContent = message;
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.style.animation = 'slideIn 0.3s ease-in reverse';
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
+  // =========================================================
+  // DONNÉES VOCABULAIRE — Onglet 1 : par thème
+  // =========================================================
+  const VOCAB_THEMATIQUE = [
+    {
+      emoji: '👑',
+      categorie: 'RÉGIMES POLITIQUES',
+      termes: [
+        { terme: 'Monarchie absolue', definition: 'Régime politique dans lequel le souverain détient tous les pouvoirs (législatif, exécutif, judiciaire) sans partage ni contrôle institutionnel.' },
+        { terme: 'Monarchie de droit divin', definition: 'Régime dans lequel le souverain tient ses pouvoirs directement de Dieu, rendant son autorité sacrée et incontestable par les hommes.' },
+        { terme: 'Monarchie parlementaire', definition: 'Régime où le roi partage le pouvoir avec un Parlement élu, comme en Angleterre au XVIIIe siècle.' },
+        { terme: 'République', definition: 'Régime politique sans roi où le pouvoir appartient au peuple qui l\'exerce par l\'intermédiaire de représentants élus.' },
+        { terme: 'Despotisme éclairé', definition: 'Forme de gouvernement absolu où le souverain entreprend des réformes inspirées des Lumières pour moderniser l\'État, tout en conservant l\'intégralité de son pouvoir politique.' }
+      ]
+    },
+    {
+      emoji: '⚖️',
+      categorie: 'SOCIÉTÉ D\'ANCIEN RÉGIME',
+      termes: [
+        { terme: 'Société d\'ordres', definition: 'Organisation sociale hiérarchisée en trois catégories distinctes définies par la naissance : la noblesse, le clergé et le tiers état, chacune ayant des droits et devoirs spécifiques.' },
+        { terme: 'Privilèges', definition: 'Avantages réservés à la noblesse et au clergé, notamment l\'exemption d\'impôts et l\'accès aux hautes fonctions.' },
+        { terme: 'Bourgeoisie', definition: 'Élite urbaine du tiers état qui s\'est enrichie par le grand commerce, la banque ou l\'exercice de certaines professions (avocats, médecins, notaires).' },
+        { terme: 'Noblesse', definition: 'Ordre social privilégié composé de l\'ancienne noblesse d\'épée et des bourgeois ayant acheté un titre.' },
+        { terme: 'Tiers état', definition: '97 % de la population française sans privilèges qui supporte le poids des impôts (paysans, artisans, ouvriers, bourgeois).' }
+      ]
+    },
+    {
+      emoji: '💡',
+      categorie: 'PHILOSOPHIE DES LUMIÈRES',
+      termes: [
+        { terme: 'Philosophes des Lumières', definition: 'Penseurs du XVIIIe siècle qui utilisent la raison pour contester l\'ordre établi et défendre la liberté, l\'égalité et la tolérance.' },
+        { terme: 'Raison', definition: 'Faculté intellectuelle qui permet de distinguer le vrai du faux en s\'appuyant sur l\'observation, l\'expérience et le raisonnement logique, sans recourir aux croyances religieuses ou aux traditions.' },
+        { terme: 'Séparation des pouvoirs', definition: 'Principe élaboré par Montesquieu, selon lequel les pouvoirs exécutif, législatif et judiciaire doivent être indépendants pour éviter le despotisme.' },
+        { terme: 'Tolérance religieuse', definition: 'Principe philosophique et politique de respect des différentes croyances et pratiques religieuses, impliquant le refus des persécutions fondées sur la religion.' }
+      ]
+    },
+    {
+      emoji: '📖',
+      categorie: 'DIFFUSION DES IDÉES',
+      termes: [
+        { terme: 'Encyclopédie', definition: 'Ouvrage de 28 volumes (1751-1772) rassemblant les connaissances de l\'époque, dirigé par Diderot et D\'Alembert, malgré la censure royale et religieuse.' },
+        { terme: 'Censure', definition: 'Contrôle exercé par le pouvoir royal et l\'Église sur les publications et les spectacles, permettant d\'interdire ou de modifier les œuvres jugées dangereuses.' },
+        { terme: 'Opinion publique', definition: 'Ensemble des idées partagées par une partie significative de la population sur des questions politiques, sociales ou culturelles.' },
+        { terme: 'Salons', definition: 'Lieux de réunion organisés dans les hôtels particuliers (souvent par des femmes de la haute bourgeoisie) où philosophes, écrivains et artistes débattent des idées nouvelles.' }
+      ]
+    }
+  ];
 
-// Initialisation simple
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('📚 Fiche de synthèse Histoire 4e - L\'Europe des Lumières chargée');
-});
+  // =========================================================
+  // DONNÉES VOCABULAIRE — Onglet 2 : par partie
+  // =========================================================
+  const VOCAB_PAR_PARTIES = [
+    {
+      termes: [
+        { terme: 'Monarchie absolue', definition: 'Régime politique dans lequel le souverain détient tous les pouvoirs sans partage.' },
+        { terme: 'Monarchie de droit divin', definition: 'Le roi tient son pouvoir directement de Dieu ; son autorité est sacrée et incontestable.' },
+        { terme: 'Société d\'ordres', definition: 'Organisation sociale hiérarchisée en trois catégories définies par la naissance : clergé, noblesse, tiers état.' },
+        { terme: 'Privilèges', definition: 'Avantages (exemption d\'impôts, accès aux charges) réservés au clergé et à la noblesse.' },
+        { terme: 'Bourgeoisie', definition: 'Élite urbaine du tiers état enrichie par le commerce, la banque ou les professions libérales.' },
+        { terme: 'Tiers état', definition: '97 % de la population sans privilèges, supportant l\'essentiel des impôts.' }
+      ]
+    },
+    {
+      termes: [
+        { terme: 'Philosophes des Lumières', definition: 'Penseurs du XVIIIe siècle qui utilisent la raison pour contester l\'ordre établi.' },
+        { terme: 'Raison', definition: 'Faculté de distinguer le vrai du faux par l\'observation et le raisonnement logique, sans recourir à la tradition religieuse.' },
+        { terme: 'Séparation des pouvoirs', definition: 'Principe de Montesquieu : les pouvoirs exécutif, législatif et judiciaire doivent être indépendants.' },
+        { terme: 'Tolérance religieuse', definition: 'Respect des différentes croyances et refus des persécutions fondées sur la religion.' },
+        { terme: 'Monarchie parlementaire', definition: 'Le roi partage le pouvoir avec un Parlement élu ; modèle anglais admiré par les philosophes.' },
+        { terme: 'Despotisme éclairé', definition: 'Gouvernement absolu qui entreprend des réformes inspirées des Lumières, tout en conservant le pouvoir absolu.' }
+      ]
+    },
+    {
+      termes: [
+        { terme: 'Encyclopédie', definition: 'Ouvrage de 28 volumes (1751-1772) dirigé par Diderot et D\'Alembert, symbole de la diffusion des Lumières malgré la censure.' },
+        { terme: 'Censure', definition: 'Contrôle exercé par le pouvoir royal et l\'Église pour interdire ou modifier les œuvres jugées dangereuses pour l\'ordre établi.' },
+        { terme: 'Opinion publique', definition: 'Ensemble des idées partagées par une partie de la population, de plus en plus critique envers l\'absolutisme.' },
+        { terme: 'Salons', definition: 'Lieux de débat intellectuel (hôtels particuliers, cafés) fréquentés par l\'élite cultivée et les philosophes.' },
+        { terme: 'République', definition: 'Régime sans roi où le pouvoir appartient au peuple représenté par des élus ; horizon politique des philosophes républicains.' }
+      ]
+    }
+  ];
+
+  // =========================================================
+  // DONNÉES COMPÉTENCES
+  // =========================================================
+  const COMPETENCES = [
+    {
+      emoji: '⏳',
+      titre: 'SE REPÉRER DANS LE TEMPS',
+      items: [
+        'Situer chronologiquement les grands événements du siècle des Lumières (publication de l\'Encyclopédie 1751-1772, règnes des despotes éclairés)',
+        'Identifier les évolutions de la pensée politique et sociale au XVIIIe siècle',
+        'Établir des liens entre les idées des Lumières et la transformation des sociétés européennes à venir'
+      ]
+    },
+    {
+      emoji: '🗺️',
+      titre: 'SE REPÉRER DANS L\'ESPACE',
+      items: [
+        'Localiser les principaux États européens au XVIIIe siècle et identifier leurs régimes politiques',
+        'Repérer les centres de diffusion des idées des Lumières (Paris, salons, académies)',
+        'Situer les territoires des despotes éclairés en Europe (Prusse, Russie, Autriche)'
+      ]
+    },
+    {
+      emoji: '📄',
+      titre: 'ANALYSER ET COMPRENDRE UN DOCUMENT',
+      items: [
+        'Extraire des informations d\'un texte philosophique des Lumières (extraits de Voltaire, Montesquieu, Rousseau, Diderot)',
+        'Analyser des images représentant la société d\'ordres et ses inégalités',
+        'Comprendre les messages véhiculés par l\'Encyclopédie et autres supports de diffusion des idées'
+      ]
+    },
+    {
+      emoji: '💭',
+      titre: 'RAISONNER ET JUSTIFIER',
+      items: [
+        'Expliquer pourquoi les philosophes contestent l\'ordre établi (absolutisme, privilèges, intolérance)',
+        'Justifier l\'importance de la raison dans la pensée des Lumières',
+        'Argumenter sur les limites du despotisme éclairé malgré certaines réformes'
+      ]
+    },
+    {
+      emoji: '🤝',
+      titre: 'COOPÉRER ET MUTUALISER',
+      items: [
+        'Participer à des débats sur les idées des Lumières et leur actualité',
+        'Travailler en groupe pour présenter les différents philosophes et leurs contributions',
+        'Partager des recherches sur la diffusion des idées et l\'opinion publique au XVIIIe siècle'
+      ]
+    }
+  ];
+
+  // =========================================================
+  // DONNÉES PERSONNAGES
+  // =========================================================
+  const PERSONNAGES = [
+    {
+      nom: 'VOLTAIRE (François-Marie Arouet)',
+      dates: '1694 – 1778',
+      description: 'Philosophe et écrivain français, figure emblématique des Lumières. Il combat toute sa vie l\'intolérance religieuse et le fanatisme. Son engagement pour la tolérance se manifeste notamment dans sa défense de victimes d\'injustices judiciaires comme l\'affaire Calas (1763). Il correspond avec les despotes éclairés comme Frédéric II de Prusse.'
+    },
+    {
+      nom: 'MONTESQUIEU (Charles-Louis de Secondat)',
+      dates: '1689 – 1755',
+      description: 'Philosophe et magistrat français, auteur de L\'Esprit des lois (1748) où il développe la théorie de la séparation des pouvoirs (exécutif, législatif, judiciaire) pour prévenir le despotisme. Dans les Lettres persanes (1721), il critique avec ironie la société française et l\'absolutisme. Ses idées influenceront profondément les constitutions modernes.'
+    },
+    {
+      nom: 'JEAN-JACQUES ROUSSEAU',
+      dates: '1712 – 1778',
+      description: 'Philosophe genevois, auteur du Contrat social (1762) qui développe l\'idée de souveraineté populaire et d\'égalité naturelle entre les hommes. Il affirme que le pouvoir ne vient pas de Dieu mais d\'un accord entre citoyens. Contrairement à d\'autres philosophes, il valorise les sentiments et la nature. Ses idées sur la démocratie influenceront fortement la Révolution française.'
+    },
+    {
+      nom: 'DENIS DIDEROT',
+      dates: '1713 – 1784',
+      description: 'Philosophe et écrivain français, directeur avec D\'Alembert de l\'Encyclopédie (1751-1772), projet monumental visant à rassembler toutes les connaissances de son temps. Malgré la censure royale et religieuse, il poursuit cette œuvre qui devient le symbole de la diffusion des Lumières. Invité par Catherine II de Russie, il conseille cette despote éclairée sur des réformes.'
+    },
+    {
+      nom: 'FRÉDÉRIC II DE PRUSSE',
+      dates: 'Règne : 1740 – 1786',
+      description: 'Roi de Prusse incarnant le despotisme éclairé. Grand admirateur des philosophes français, il correspond avec Voltaire qu\'il invite à sa cour. Il modernise la Prusse par des réformes dans l\'éducation, la justice et l\'économie, tout en développant la tolérance religieuse. Cependant, il conserve son pouvoir absolu, illustrant les limites du despotisme éclairé.'
+    },
+    {
+      nom: 'CATHERINE II DE RUSSIE',
+      dates: 'Règne : 1762 – 1796',
+      description: 'Impératrice de Russie représentant le despotisme éclairé. Admiratrice des Lumières, elle correspond avec les philosophes français et accueille Diderot à Saint-Pétersbourg. Elle entreprend des réformes pour moderniser la Russie (éducation, justice, abolition de la torture) et favorise les arts et les sciences. Néanmoins, elle maintient fermement son pouvoir autocratique.'
+    }
+  ];
+
+  // =========================================================
+  // DONNÉES DATES CLÉS
+  // =========================================================
+  const DATES = [
+    {
+      emoji: '📚',
+      titre: 'LES GRANDES ŒUVRES DES LUMIÈRES (1721–1763)',
+      dates: [
+        { date: '1721', evenement: 'Montesquieu publie les Lettres persanes qui critiquent avec ironie la société française' },
+        { date: '1734', evenement: 'Voltaire publie les Lettres philosophiques où il vante la tolérance religieuse anglaise' },
+        { date: '1748', evenement: 'Montesquieu publie De l\'esprit des lois et théorise la séparation des pouvoirs' },
+        { date: '1751–1772', evenement: 'Diderot et D\'Alembert dirigent la publication de l\'Encyclopédie en 28 volumes' },
+        { date: '1759', evenement: 'Louis XV et l\'Église catholique condamnent et censurent l\'Encyclopédie' },
+        { date: '1762', evenement: 'Rousseau publie Du Contrat social et développe l\'idée de souveraineté populaire' },
+        { date: '1763', evenement: 'Voltaire s\'engage dans l\'affaire Calas pour dénoncer l\'intolérance religieuse' }
+      ]
+    },
+    {
+      emoji: '👑',
+      titre: 'LE DESPOTISME ÉCLAIRÉ (1740–1796)',
+      dates: [
+        { date: '1740–1786', evenement: 'Règne de Frédéric II de Prusse, despote éclairé correspondant avec Voltaire' },
+        { date: '1762–1796', evenement: 'Règne de Catherine II de Russie, despote éclairée accueillant Diderot' },
+        { date: '1765–1790', evenement: 'Règne de Joseph II d\'Autriche, despote éclairé menant des réformes inspirées des Lumières' }
+      ]
+    },
+    {
+      emoji: '⚡',
+      titre: 'VERS LA RÉVOLUTION (1774–1789)',
+      dates: [
+        { date: '1774–1792', evenement: 'Règne de Louis XVI en France, période de critique croissante de l\'absolutisme' },
+        { date: '1776', evenement: 'Déclaration d\'indépendance américaine, inspirée des idées des Lumières' },
+        { date: '1787', evenement: 'Assemblée des notables en France, premiers signes de la crise de l\'Ancien Régime' },
+        { date: '1789', evenement: 'Convocation des États généraux et début de la Révolution française' }
+      ]
+    }
+  ];
+
+  // =========================================================
+  // GÉNÉRATION DYNAMIQUE — Plan
+  // =========================================================
+  function buildPlan() {
+    const grid = document.getElementById('plan-cards-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    const n = Math.min(NB_PARTIES, PARTIES.length);
+    for (let i = 0; i < n; i++) {
+      const p = PARTIES[i];
+      const color = PLAN_COLORS[i];
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.borderColor = color;
+      card.innerHTML = `
+        <div class="plan-card-header">
+          <div class="plan-card-icon" style="background:${color}">${p.roman}</div>
+          <h3 class="plan-card-title" style="color:${color}">${p.titre}</h3>
+        </div>
+        <div class="plan-card-content"><p>${p.description}</p></div>`;
+      grid.appendChild(card);
+    }
+  }
+
+  // =========================================================
+  // GÉNÉRATION DYNAMIQUE — Compétences
+  // =========================================================
+  function buildCompetences() {
+    const grid = document.getElementById('competences-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    COMPETENCES.forEach(cat => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const items = cat.items.map(i => `<li>${i}</li>`).join('');
+      card.innerHTML = `
+        <div class="competences-title">${cat.emoji} ${cat.titre}</div>
+        <ul class="list-styled">${items}</ul>`;
+      grid.appendChild(card);
+    });
+  }
+
+  // =========================================================
+  // GÉNÉRATION DYNAMIQUE — Vocabulaire thématique
+  // =========================================================
+  function buildVocabThematique() {
+    const grid = document.getElementById('vocab-thematique-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    VOCAB_THEMATIQUE.forEach(cat => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const items = cat.termes.map(t =>
+        `<li><span class="vocab-term">${t.terme} :</span><span class="vocab-definition">${t.definition}</span></li>`
+      ).join('');
+      card.innerHTML = `
+        <div class="vocab-category-title">${cat.emoji} ${cat.categorie}</div>
+        <ul class="list-styled">${items}</ul>`;
+      grid.appendChild(card);
+    });
+  }
+
+  // =========================================================
+  // GÉNÉRATION DYNAMIQUE — Vocabulaire par parties
+  // =========================================================
+  function buildVocabParties() {
+    const grid = document.getElementById('vocab-parties-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    const n = Math.min(NB_PARTIES, PARTIES.length, VOCAB_PAR_PARTIES.length);
+    for (let i = 0; i < n; i++) {
+      const partie = PARTIES[i];
+      const vocab = VOCAB_PAR_PARTIES[i];
+      const card = document.createElement('div');
+      card.className = 'card';
+      const items = vocab.termes.map(t =>
+        `<li><span class="vocab-term">${t.terme} :</span><span class="vocab-definition">${t.definition}</span></li>`
+      ).join('');
+      card.innerHTML = `
+        <div class="vocab-category-title">${partie.roman} — ${partie.titre}</div>
+        <ul class="list-styled">${items}</ul>`;
+      grid.appendChild(card);
+    }
+  }
+
+  // =========================================================
+  // GÉNÉRATION DYNAMIQUE — Dates clés
+  // =========================================================
+  function buildDates() {
+    const container = document.getElementById('dates-content');
+    if (!container) return;
+    container.innerHTML = '';
+    DATES.forEach(periode => {
+      const items = periode.dates.map(d =>
+        `<li><span class="date-major">${d.date}</span><span class="date-event"> ${d.evenement}</span></li>`
+      ).join('');
+      container.innerHTML += `
+        <div class="dates-highlight-box">
+          <h4>${periode.emoji} ${periode.titre}</h4>
+          <ul class="list-styled">${items}</ul>
+        </div>`;
+    });
+  }
+
+  // =========================================================
+  // GÉNÉRATION DYNAMIQUE — Personnages
+  // =========================================================
+  function buildPersonnages() {
+    const grid = document.getElementById('personnages-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    PERSONNAGES.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="personnages-title">${p.nom}</div>
+        <div class="personnages-dates">${p.dates}</div>
+        <div class="personnages-content">${p.description}</div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  // =========================================================
+  // GÉNÉRATION DYNAMIQUE — Bilan
+  // =========================================================
+  function buildBilan() {
+    const container = document.getElementById('bilan-aspects');
+    if (!container) return;
+    container.innerHTML = '';
+    const n = Math.min(NB_PARTIES, PARTIES.length);
+    for (let i = 0; i < n; i++) {
+      const p = PARTIES[i];
+      container.innerHTML += `
+        <h5>${p.bilan_titre}</h5>
+        <p>${p.bilan_texte}</p>`;
+    }
+  }
+
+  // =========================================================
+  // Toggle onglets vocabulaire
+  // =========================================================
+  function switchVocabTab(tab, btn) {
+    document.querySelectorAll('.vocab-tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.vocab-tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('vocab-tab-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // =========================================================
+  // UI — Thème & Police
+  // =========================================================
+  let isDarkTheme = false;
+  let currentFontSize = 16;
+
+  function toggleTheme() {
+    isDarkTheme = !isDarkTheme;
+    document.body.dataset.theme = isDarkTheme ? 'dark' : '';
+    const btn = document.querySelector('.btn-theme');
+    btn.textContent = isDarkTheme ? '☀️ Clair' : '🌙 Sombre';
+    showNotification(isDarkTheme ? 'Mode sombre activé' : 'Mode clair activé');
+  }
+
+  function changeFontSize() {
+    const sizes = [14, 16, 18, 20, 22];
+    const currentIndex = sizes.indexOf(currentFontSize);
+    const nextIndex = (currentIndex + 1) % sizes.length;
+    currentFontSize = sizes[nextIndex];
+    document.body.style.fontSize = currentFontSize + 'px';
+    const sizeNames = ['Petit', 'Normal', 'Grand', 'Très grand', 'Extra grand'];
+    showNotification(`Taille : ${sizeNames[nextIndex]}`);
+  }
+
+  function showNotification(message) {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      notification.style.animation = 'slideIn 0.3s ease-in reverse';
+      setTimeout(() => notification.remove(), 300);
+    }, 2000);
+  }
+
+  // =========================================================
+  // Initialisation
+  // =========================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    buildPlan();
+    buildCompetences();
+    buildVocabThematique();
+    buildVocabParties();
+    buildDates();
+    buildPersonnages();
+    buildBilan();
+    console.log('📚 Fiche Histoire 4e – L\'Europe des Lumières chargée (' + NB_PARTIES + ' parties)');
+  });
 </script>
 </body>
 </html>
